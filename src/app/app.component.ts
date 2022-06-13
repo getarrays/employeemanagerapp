@@ -48,27 +48,27 @@ export class AppComponent implements OnInit {
   }
 
   public onUpdateEmloyee(employee: Employee): void {
-    this.employeeService.updateEmployee(employee).subscribe(
-      (response: Employee) => {
+    this.employeeService.updateEmployee(employee).subscribe({
+      next: (response: Employee) => {
         console.log(response);
         this.getEmployees();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         alert(error.message);
       }
-    );
+  });
   }
 
   public onDeleteEmloyee(employeeId: number): void {
-    this.employeeService.deleteEmployee(employeeId).subscribe(
-      (response: void) => {
+    this.employeeService.deleteEmployee(employeeId).subscribe({
+      next: (response: void) => {
         console.log(response);
         this.getEmployees();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         alert(error.message);
       }
-    );
+  });
   }
 
   public searchEmployees(key: string): void {
