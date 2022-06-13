@@ -10,9 +10,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public employees: Employee[];
-  public editEmployee: Employee;
-  public deleteEmployee: Employee;
+  public employees: Employee[] = [];
+  public editEmployee: Employee | undefined;
+  public deleteEmployee: Employee | undefined;
 
   constructor(private employeeService: EmployeeService){}
 
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onAddEmloyee(addForm: NgForm): void {
+  public onAddEmployee(addForm: NgForm): void {
     document.getElementById('add-employee-form').click();
     this.employeeService.addEmployee(addForm.value).subscribe(
       (response: Employee) => {
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onUpdateEmloyee(employee: Employee): void {
+  public onUpdateEmployee(employee: Employee): void {
     this.employeeService.updateEmployee(employee).subscribe(
       (response: Employee) => {
         console.log(response);
@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onDeleteEmloyee(employeeId: number): void {
+  public onDeleteEmployee(employeeId: number): void {
     this.employeeService.deleteEmployee(employeeId).subscribe(
       (response: void) => {
         console.log(response);
@@ -88,7 +88,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public onOpenModal(employee: Employee, mode: string): void {
+  public onOpenModal(mode: string, employee?: Employee ): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
